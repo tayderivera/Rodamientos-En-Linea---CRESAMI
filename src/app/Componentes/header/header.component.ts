@@ -9,21 +9,22 @@ import { Component, HostListener } from '@angular/core';
 })
 export class HeaderComponent {
 
-
+  isHeroSection = true;
  scrolled =  false;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     this.scrolled = scrollPosition > 50; // Cambia a `true` si el scroll es mayor a 50px
+    const heroHeight = document.getElementById('hero')?.offsetHeight || 0;
+    this.isHeroSection = window.scrollY < heroHeight;
   }
 
+  isMenuOpen = false;
 
-  scrollToForm() {
-    const formSection = document.getElementById('formulario');
-    if (formSection) {
-      formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
+
 
 }

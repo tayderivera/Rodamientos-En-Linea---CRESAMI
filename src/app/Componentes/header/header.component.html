@@ -1,25 +1,33 @@
-<header id="header" [ngClass]="{'bg-transparent text-white': !scrolled, 'bg-white bg-opacity-20 text-gray-800 shadow-md': scrolled}" 
-    class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
-  <div class="container mx-auto flex flex-wrap justify-between items-center px-4 py-4">
+<header id="header" [ngClass]="{'scrolled': scrolled, 'hero-section-menu-open': isHeroSection}" 
+    class="navbar">
+  <div class="container" style="font-family: Inter;">
       <!-- Logo -->
-      <a href="#" class="text-xl md:text-2xl font-bold sm:px-26">
-        <img class="header-logo w-[40px] md:w-[60px] inline" src="./assets/rel icon.png" alt="Logo">
-        
+      <a href="#" class="logo">
+        <img class="header-logo" src="./assets/rel icon.png" alt="Logo">
       </a>
       <!-- Navegacion -->
-      <nav class="hidden md:flex space-x-6 lg:space-x-12 font-bold px-0 md:px-36 font-[Inter]">
-          <a href="#inicio" class="hover:text-gray-500 transition">Inicio</a>
-          <a href="#nosotros" class="hover:text-gray-500 transition">Nosotros</a>
-          <a href="#productos" class="hover:text-gray-500 transition">Productos</a>
-          <a href="#contacto" class="hover:text-gray-500 transition">Contacto</a>
+      <nav class="desktop-nav">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#productos" class="nav-link">Productos</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
       </nav>
       <!-- Mobile Menu -->
-      <div class="md:hidden">
-          <button id="menu-toggle" class="text-white focus:outline-none">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="mobile-menu">
+          <button id="menu-toggle" class="menu-button" (click)="toggleMenu()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
               </svg>
           </button>
       </div>
   </div>
+  <!-- Menú desplegable -->
+  <div *ngIf="isMenuOpen" [ngClass]="{'dropdown-menu-hero': isHeroSection, 'dropdown-menu-default': !isHeroSection}" class="dropdown-menu">
+    <nav class="mobile-nav">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#productos" class="nav-link">Productos</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+    </nav>
+</div>
 </header>
