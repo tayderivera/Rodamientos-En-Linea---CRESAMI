@@ -1,4 +1,4 @@
-<header id="header" [ngClass]="{'scrolled': scrolled, 'hero-section-menu-open': isHeroSection}" 
+<header id="header" [ngClass]="{'scrolled': scrolled, 'hero-section-menu-open': isHeroSection && isLargeScreen}" 
     class="navbar">
   <div class="container" style="font-family: Inter;">
       <!-- Logo -->
@@ -7,10 +7,10 @@
       </a>
       <!-- Navegacion -->
       <nav class="desktop-nav">
-        <a href="#inicio" class="nav-link">Inicio</a>
-        <a href="#nosotros" class="nav-link">Nosotros</a>
-        <a href="#productos" class="nav-link">Productos</a>
-        <a href="#contacto" class="nav-link">Contacto</a>
+        <a class="nav-link cursor-pointer"(click)="scrollToSection('hero')">Inicio</a>
+        <a class="nav-link cursor-pointer" (click)="scrollToSection('nosotros')">Nosotros</a>
+        <a class="nav-link cursor-pointer" (click)="scrollToSection('productos')">Productos</a>
+        <a class="nav-link cursor-pointer" (click)="scrollToSection('contacto')">Contacto</a>
       </nav>
       <!-- Mobile Menu -->
       <div class="mobile-menu">
