@@ -106,3 +106,17 @@
         display: block;
     }
 }
+@media (min-width: 1024px) {
+    .navbar.hero-section-menu-open {
+        background-color: transparent; /* Fondo transparente sobre la sección hero */
+        box-shadow: none; /* Sin sombra */
+    }
+
+    .navbar.hero-section-menu-open .nav-link {
+        color: white; /* Color blanco sobre la sección hero */
+    }
+
+    .navbar.hero-section-menu-open .menu-icon {
+        color: white; /* Icono blanco sobre la sección hero */
+    }
+}

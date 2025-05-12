@@ -10,7 +10,8 @@ import { Component, HostListener } from '@angular/core';
 export class HeaderComponent {
 
   isHeroSection = true;
- scrolled =  false;
+  isLargeScreen: boolean = window.innerWidth >= 1024;
+  scrolled =  false;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -19,12 +20,24 @@ export class HeaderComponent {
     const heroHeight = document.getElementById('hero')?.offsetHeight || 0;
     this.isHeroSection = window.scrollY < heroHeight;
   }
-
+  onResize(event: Event): void {
+    this.isLargeScreen = window.innerWidth >= 1024;
+  }
   isMenuOpen = false;
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  ngOnInit(): void {
+    this.isLargeScreen = window.innerWidth >= 1024;
+  }
 
+  scrollToSection(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  
 }

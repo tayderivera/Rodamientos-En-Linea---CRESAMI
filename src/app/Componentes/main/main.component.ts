@@ -18,7 +18,13 @@ export class MainComponent {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     this.scrolled = scrollPosition > 50; // Cambia a `true` si el scroll es mayor a 50px
   }
-
+  scrollToSection(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  
 
   scrollToForm() {
     const formSection = document.getElementById('formulario');
