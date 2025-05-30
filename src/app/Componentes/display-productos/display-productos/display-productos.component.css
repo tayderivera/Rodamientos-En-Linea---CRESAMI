@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo semitransparente por defecto */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.hero-section-menu-open {
+    background-color: transparent; /* Fondo transparente sobre la sección hero */
+    box-shadow: none; /* Sin sombra */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo img {
+    width: 40px;
+}
+
+.desktop-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333; /* Color por defecto */
+    transition: color 0.3s ease;
+}
+
+.navbar.hero-section-menu-open .nav-link {
+    color: white; /* Color blanco sobre la sección hero */
+}
+
+.nav-link:hover {
+    color: gray;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    color: #333; /* Color por defecto */
+}
+
+.navbar.hero-section-menu-open .menu-icon {
+    color: white; /* Color blanco d ela fuente sobre la sección hero */
+}
+.navbar.hero-section-menu-open  {
+    background-color: #243344; /* Color blanco d ela fuente sobre la sección hero */
+}
+
+.dropdown-menu-default {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: #333; /* Color por defecto */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dropdown-menu-hero {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #243344;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+    .mobile-menu {
+        display: block;
+    }
+}
+@media (min-width: 1024px) {
+    .navbar.hero-section-menu-open {
+        background-color: transparent; /* Fondo transparente sobre la sección hero */
+        box-shadow: none; /* Sin sombra */
+    }
+
+    .navbar.hero-section-menu-open .nav-link {
+        color: white; /* Color blanco sobre la sección hero */
+    }
+
+    .navbar.hero-section-menu-open .menu-icon {
+        color: white; /* Icono blanco sobre la sección hero */
+    }
+}
+
+.swal2-confirm-custom {
+  background-color: #22c55e;  /* verde */
+  color: #fff;
+  font-family: 'Inter' sans-serif;
+}
+.swal2-cancel-custom {
+  background-color: #e87025 !important; /* naranja */
+  color: #fff !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.swal2-popup-custom {
+  font-family: 'Inter', sans-serif !important;
+}

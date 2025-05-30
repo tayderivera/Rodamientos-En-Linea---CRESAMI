@@ -3,10 +3,14 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { MarcasComponent } from "../marcas/marcas.component";
+import { NosotrosComponent } from "../nosotros/nosotros.component";
+import { RodamientosComponent } from "../rodamientos/rodamientos.component";
+import { ContactanosComponent } from "../contactanos/contactanos.component";
 
 @Component({
   selector: 'app-main',
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent, MarcasComponent, NosotrosComponent, RodamientosComponent, ContactanosComponent, FooterComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
