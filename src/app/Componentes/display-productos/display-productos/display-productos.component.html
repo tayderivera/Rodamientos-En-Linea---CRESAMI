@@ -2,16 +2,32 @@
     class="navbar">
   <div class="container" style="font-family: Inter;">
       <!-- Logo -->
-      <a href="#" class="logo">
-        <img class="header-logo" src="./assets/rel icon.png" alt="Logo">
+      <a href="#" class="logo flex items-center">
+        <img class="header-logo" src="./assets/RODAMIENTOSENLINEA.png" alt="Logo">
       </a>
       <!-- Navegacion -->
-      <nav class="desktop-nav">
-        <a href="" class="nav-link cursor-pointer" >Inicio</a>
-
+      <nav class="desktop-nav" *ngIf="!usuarioActual">
+        <a href="" class="nav-link cursor-pointer">Inicio</a>
         <a class="nav-link cursor-pointer" (click)="scrollToSection('productos')">Productos</a>
         <a class="nav-link cursor-pointer" (click)="scrollToSection('contacto')">Contacto</a>
       </nav>
+
+      <!-- Menú usuario (solo si hay sesión iniciada) -->
+      <div class="flex items-center gap-2" *ngIf="usuarioActual as user">
+        <span class="text-gray-700 text-sm font-medium" (click)="toggleMenuUsuario()">
+          {{ user.displayName || user.email }}
+        </span>
+        <!-- icono de usuario, etc -->
+        <div *ngIf="menuUsuarioAbierto" class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50">
+          <button 
+            class="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            (click)="cerrarSesion()">
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+        
+      
       <!-- Mobile Menu -->
       <div class="mobile-menu">
           <button id="menu-toggle" class="menu-button" (click)="toggleMenu()">
@@ -37,13 +53,13 @@
 
 <!-- Sección de título, búsqueda y filtros -->
 <section class="py-8 font-[Inter] mt-20">
-  <h1 class="text-2xl sm:text-2xl md:text-4xl font-bold font-[Inter] text-center">Productos</h1>
-  <div class="flex mt-4 md:mt-6 justify-center mb-8">
-    <div class="w-12 md:w-16 h-1 rounded-full bg-[#e87025] inline-flex"></div>
+  <h1 class="text-xl sm:text-2xl md:text-3xl font-bold font-[Inter] text-center">Productos</h1>
+  <div class="flex mt-2 md:mt-3 justify-center mb-4">
+    <div class="w-8 md:w-12 h-1 rounded-full bg-[#e87025] inline-flex"></div>
   </div>
   <div class="bg-white rounded-xl border border-gray-300 p-4 max-w-lg mx-auto">
     <div class="flex justify-center mb-4">
-      <button (click)="abrirModal()" class="px-6 py-2 border-2 border-green-500 text-green-600 rounded-xl font-medium hover:bg-green-50 cursor-pointer transition text-base">
+      <button *ngIf="usuarioActual" (click)="abrirModal()" class="px-6 py-2 border-2 border-green-500 text-green-600 rounded-xl font-medium hover:bg-green-50 cursor-pointer transition text-base">
         Nuevo producto
       </button>
     </div>
@@ -164,6 +180,7 @@
 
 
         <button 
+        
           class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 hover:cursor-pointer"
           (click)="cerrarModal()">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -175,25 +192,25 @@
 
     <!-- Grilla de productos -->
     <div class="flex flex-wrap justify-center gap-6">
-      <div *ngFor="let producto of productosFiltrados" class="w-64 bg-white rounded-xl shadow p-4 m-2 flex flex-col items-center">
+      <div *ngFor="let producto of productosFiltrados" class="w-48 bg-white rounded-xl shadow p-4 m-2 flex flex-col items-center border border-gray-300">
         <a class="block relative h-40 rounded overflow-hidden">
           <img alt="ecommerce" class="object-cover object-center w-full h-full block" [src]="producto.imagenProducto">
         </a>
       <div class="flex items-center justify-between"></div>
         <div class="mt-4">
-          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
+          <h3 class="text-gray-500 text-[10px] tracking-widest title-font mb-1">
             {{ producto.categoriaProducto }} <span class="mx-1">|</span> {{ producto.marcaProducto }}
           </h3>
-          <h2 class="text-gray-900 title-font text-lg font-medium">{{ producto.nombreProducto }}</h2>
+          <h2 class="text-gray-900 title-font text-md ">{{ producto.nombreProducto }}</h2>
            <!-- Botón Editar -->
-        <button class="p-2 rounded border border-blue-400 bg-white hover:bg-blue-50 transition cursor-pointer "(click)="abrirModalEdicion(producto)">
+        <button *ngIf="usuarioActual" class="p-2 rounded border border-blue-400 bg-white hover:bg-blue-50 transition cursor-pointer" (click)="abrirModalEdicion(producto)">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b5563" class="bi bi-pencil-square" viewBox="0 0 16 16">
           <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
           <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
         </svg>
         </button>
         <!-- Botón Eliminar (cambia estado a inactivo) -->
-        <button *ngIf="producto.estado !== 'inactivo'" class="p-2 rounded border border-red-400 bg-white hover:bg-red-50 transition ml-2 cursor-pointer"(click)="desactivarProducto(producto)">
+        <button *ngIf="producto.estado !== 'inactivo' && usuarioActual" class="p-2 rounded border border-red-400 bg-white hover:bg-red-50 transition ml-2 cursor-pointer"(click)="desactivarProducto(producto)">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b5563" class="bi bi-trash" viewBox="0 0 16 16">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
@@ -202,7 +219,7 @@
 
         <!-- Botón Restaurar (solo si el producto está inactivo) -->
         <button
-          *ngIf="producto.estado === 'inactivo'"
+          *ngIf="producto.estado === 'inactivo' && usuarioActual"
           class="p-2 rounded border border-green-400 bg-white hover:bg-green-50 transition ml-2"
           (click)="activarProducto(producto)">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#22c55e" class="bi bi-plus-lg" viewBox="0 0 16 16">

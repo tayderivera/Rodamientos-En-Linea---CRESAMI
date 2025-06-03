@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 export const appConfig: ApplicationConfig = {
   providers: [
