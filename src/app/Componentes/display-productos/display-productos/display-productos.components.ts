@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from "../../header/header.component";
 import { ProductoService } from "../../../Servicios/producto.service";
 import { Producto } from '../../../Clases/bd';
@@ -8,8 +8,12 @@ import { Firestore, addDoc, collection, doc, updateDoc } from '@angular/fire/fir
 
 import { firstValueFrom } from 'rxjs';
 import { SubirImagenService } from '../../../Servicios/subirimagen.service';
-
 import Swal from 'sweetalert2';
+import { Auth, onAuthStateChanged, User, signOut }  from '@angular/fire/auth';
+import { Router } from '@angular/router';
+
+
+
 @Component({
   selector: 'app-display-productos',
   imports: [ CommonModule, FormsModule],  
@@ -18,6 +22,11 @@ import Swal from 'sweetalert2';
   
 })
 export class DisplayProductosComponent {
+
+//para mostra el usuario actual
+ usuarioActual: User | null = null;
+ menuUsuarioAbierto =  false;
+  auth = inject(Auth);
 
 productos : Producto[] = []; //para el display de productos
 
@@ -38,7 +47,7 @@ busqueda ="";
 
   // Constructor
 constructor(private productoService: ProductoService, private firestore: Firestore,
-  private subirImagenService:SubirImagenService
+  private subirImagenService:SubirImagenService, private authentication :  Auth, private router: Router
 ) { 
   this.productoService = productoService;
   this.firestore = firestore;
@@ -241,13 +250,35 @@ get productosFiltrados() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-
-  ngOnInit(): void {
-    this.productoService.getProductos().subscribe((productos: Producto[]) => {
-      this.productos = productos;
-      console.log(this.productos);
-    });
+  toggleMenuUsuario(){
+      this.menuUsuarioAbierto = !this.menuUsuarioAbierto;
   }
 
+   cerrarMenuUsuario() {
+    this.menuUsuarioAbierto = false;
+  }
+
+  cerrarSesion(){
+    signOut(this.authentication).then(() => {
+      this.router.navigate(['']);
+    });
+    this.cerrarMenuUsuario();
+  }
+
+ ngOnInit(): void {
+    this.productoService.getProductos().subscribe((productos: Producto[]) => {
+      this.productos = productos;
+      
+    });
+    onAuthStateChanged(this.auth, (user) => {
+      this.usuarioActual =  user;
+    })
+  }
+
+
+  }
+
+
+ 
   
-}
+
