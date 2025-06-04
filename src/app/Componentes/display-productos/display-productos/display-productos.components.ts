@@ -10,13 +10,13 @@ import { firstValueFrom } from 'rxjs';
 import { SubirImagenService } from '../../../Servicios/subirimagen.service';
 import Swal from 'sweetalert2';
 import { Auth, onAuthStateChanged, User, signOut }  from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-display-productos',
-  imports: [ CommonModule, FormsModule],  
+  imports: [ CommonModule, FormsModule, RouterModule],  
   templateUrl: './display-productos.component.html',
   styleUrl: './display-productos.component.css',
   
