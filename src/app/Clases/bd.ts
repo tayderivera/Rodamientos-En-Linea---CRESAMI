@@ -19,3 +19,21 @@ export class Producto{
         this.estado=data.estado;    
     }
 }
+export class CotizacionFormulario {
+    constructor(){}
+        nombre: string="";
+        apellido: string="";
+        email: string="";
+        mensaje?: string="";
+        productos: Producto[] | undefined;
+
+     setData(data:any){
+        this.nombre=data.nombre;
+        this.apellido=data.apellido;
+        this.email=data.email;
+        this.mensaje=data.mensaje;
+        this.productos=data.productos;
+        
+    }
+
+}

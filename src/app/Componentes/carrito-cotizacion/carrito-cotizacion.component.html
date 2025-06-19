@@ -1,0 +1,95 @@
+<!-- Popover del carrito -->
+<div class="relative">
+  <!-- Icono del carrito -->
+  <button (click)="togglePopover()" class="relative cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 007 17h10a1 1 0 00.95-.68L21 13M7 13V6a1 1 0 011-1h5a1 1 0 011 1v7" />
+    </svg>
+    <span *ngIf="cantidad > 0" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">{{ cantidad }}</span>
+  </button>
+
+  <!-- Popover -->
+  <div *ngIf="popoverAbierto" class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border z-50">
+    <div class="p-4">
+      <h3 class="font-semibold mb-2">Carrito de cotización</h3>
+      <div *ngIf="productos.length === 0" class="text-gray-400 text-sm">No hay productos en el carrito.</div>
+      <div *ngFor="let prod of productos" class="flex items-center gap-3 py-2 border-b last:border-b-0">
+        <img [src]="prod.imagenProducto" class="w-12 h-12 object-cover rounded" alt="producto">
+        <div>
+          <div class="font-medium text-sm">{{ prod.nombreProducto }}</div>
+          <div class="text-xs text-gray-500">{{ prod.marcaProducto }}</div>
+        </div>
+
+        <!--Botón de cerrar X-->
+        <button
+          (click)="eliminarProducto(prod.idProducto)"
+          class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-200 transition cursor-pointer"
+          aria-label="Eliminar">
+          <span class="text-xl leading-none text-gray-600">&times;</span>
+        </button>
+      </div>
+      <!--Botón de enviar cotización-->
+      <button (click)="abrirModalCotizacion()" *ngIf="productos.length > 0" class="w-full mt-4 bg-[#e87025] text-white py-2 rounded-xl hover:bg-[#913d09] cursor-pointer">Enviar</button>
+            
+    </div>
+  </div>
+
+  <!--Modal de cotización-->
+  <div *ngIf="modalCotizacion" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm">
+      <div class="bg-white p-8 rounded shadow-lg relative w-[800px] max-w-[95%]">
+        <button (click)="modalCotizacion = false" class="absolute top-2 right-2 text-gray-400 cursor-pointer hover:text-gray-700 text-2xl">&times;</button>
+      
+        <h2 class="text-2xl font-bold mb-4 text">Enviar cotización</h2>
+
+        <!-- Nombre y Apellido -->
+    <form  autocomplete="off" class="mt-3"> <!--(ngSubmit)="enviarCotizacion()"-->
+      <div class="flex gap-4 mb-4">
+          <div class="flex-1/2">
+            <label class="block font-medium mb-1">Nombre *</label>
+            <input type="text" [(ngModel)]="nombre" name="nombre" required class="w-full border border-gray-300 rounded-md py-2" />
+          </div>
+          <div class="flex-1/2">
+            <label class="block mb-1 font-medium"> Empresa</label>
+            <input type="text" [(ngModel)]="apellido" name="apellido" required class="w-full border border-gray-300 rounded-md py-2" />
+
+          </div>
+      </div>
+
+      <div class="flex gap-4 mb-4">
+        <div class="flex-1/2">
+              <label class="block mb-1 font-medium">Correo electrónico * </label>
+             <input type="email" name="email" required class="w-full border border-gray-300 rounded-md py-2 mb-4" />
+          </div>
+          <div class="flex-1/2">
+        <label class="block mb-1 font-medium">Teléfono</label>
+        <input type="text" name="telefono" class="w-full border border-gray-300 rounded-md py-2 mb-4" />
+      </div>
+
+      </div>
+
+      
+    
+      <label class="block mb-1 font-medium">Mensaje</label>
+      <textarea name="mensaje" rows="3" class="w-full border border-gray-300 rounded-md py-2 mb-4"></textarea> <!--[(ngModel)]="mensaje"-->
+
+      <div class="mb-2 mt-2">
+        <div class="font-semibold">Productos a cotizar:</div>
+        <ul class="grid grid-cols-2 gap-x-4 gap-y-2 mt-4">
+          <li *ngFor="let p of productos" class="flex items-center mb-1">
+            <img [src]="p.imagenProducto" alt="" class="w-10 h- mr-2" />
+            <span class="text-sm">{{ p.nombreProducto }}</span>
+          </li>
+        </ul>
+      </div>
+      
+       <!--Botón de enviar cotización-->
+      <button  type="submit"  (click)="abrirModalCotizacion()" *ngIf="productos.length > 0" class="w-full mt-4 bg-[#e87025] text-white py-2 rounded-xl hover:bg-[#913d09] cursor-pointer">Enviar</button>
+       <p class="text-xs text-gray-500 mb-4 mt-4">
+        Tu mensaje será enviado a: <span class="font-semibold">info&#64;cresami.com</span>
+      </p>
+    </form>
+   </div>
+  </div>
+      
+
+</div>
