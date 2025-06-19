@@ -1,1 +1,148 @@
-<p>detalle-producto works!</p>
+<header id="header"
+    class="navbar">
+  <div class="container" style="font-family: Inter;">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <img class="header-logo" src="./assets/RODAMIENTOSENLINEA.png" alt="Logo">
+      </a>
+      <!-- Navegacion -->
+      <nav class="desktop-nav">
+        <a href="" class="nav-link cursor-pointer">Inicio</a>
+        <a class="nav-link cursor-pointer">Productos</a>
+        <a class="nav-link cursor-pointer">Contacto</a>
+        
+          <app-carrito-cotizacion></app-carrito-cotizacion>
+      
+      </nav>
+
+        
+      
+      <!-- Mobile Menu -->
+      <div class="mobile-menu">
+          <button id="menu-toggle" class="menu-button" (click)="toggleMenu()">
+              <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+          </button>
+      </div>
+  </div>
+
+  <!-- Menú desplegable -->
+  <div *ngIf="isMenuOpen" >
+    <nav class="mobile-nav">
+        <a href="#inicio" class="nav-link">Inicio</a>  
+        <a href="#productos" class="nav-link">Productos</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+    </nav>
+</div>
+</header>
+
+
+
+<section class=" font-[Inter] mt-35 overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap" *ngIf="producto">
+      <div class="w-90 h-100 rounded overflow-hidden flex items-center justify-center bg-gray-50 mx-auto mb-6">
+        <img
+          [src]="producto.imagenProducto"
+          alt="ecommerce"
+          class="w-full h-full object-cover"
+        >
+      </div>
+      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">{{producto.marcaProducto}}</h2>
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-medium font-[Inter] mt-2">{{producto.nombreProducto}}</h1>
+        <div class="flex mb-4">
+          
+        </div>
+        <p class="leading-relaxed">{{producto.descripcionProducto}}</p>
+        <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+          
+          
+        </div>
+        <div class="flex">
+        <button (click)="agregaralCarrito()"
+        class="flex text-white bg-[#e87025] text-sm md:text-lg font-[Inter] border-0 py-2 px-8 focus:outline-none hover:bg-[#913d09] rounded-2xl cursor-pointer">
+        Cotizar
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="font-[Inter] mt-10 overflow-hidden mx-20 mb-20">
+  <h2 class="text-sm sm:text-2xl md:text-3xl font-medium font-[Inter] text-center mb-12 ">Productos relacionados</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let prod of productosRelacionados" class=" bg-white rounded-xl shadow p-4 flex flex-col items-center border border-gray-300 cursor-pointer"
+       (click)="verDetalle(prod.idProducto)">
+        <a class="block relative h-40 rounded overflow-hidden">
+          <img alt="relacionado" class="object-cover object-center w-full h-full block" [src]="prod.imagenProducto">
+        </a>
+ 
+        <div class="mt-4">
+          <h3 class="text-gray-500 text-[10px] tracking-widest title-font mb-1">
+            {{ prod.categoriaProducto }} <span class="mx-1">|</span> {{ prod.marcaProducto }}
+          </h3>
+          <h2 class="text-gray-900 title-font text-md ">{{ prod.nombreProducto }}</h2>
+         
+
+        </div>
+      </div>
+      </div>
+</section>
+       
+
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

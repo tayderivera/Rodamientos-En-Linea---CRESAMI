@@ -15,4 +15,8 @@ export class ProductoService {
       const productosCollection = collection(this.firestore, 'Producto');
         return collectionData(productosCollection, { idField: 'idProducto' }) as Observable<Producto[]>;
   }
+  getProductoPorId(id: string): Observable<Producto | undefined> {
+  const productoDoc = doc(this.firestore, `${this.collectionName}/${id}`);
+  return docData(productoDoc, { idField: 'idProducto' }) as Observable<Producto | undefined>;
+}
 }

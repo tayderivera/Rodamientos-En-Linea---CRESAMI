@@ -11,12 +11,14 @@ import { SubirImagenService } from '../../../Servicios/subirimagen.service';
 import Swal from 'sweetalert2';
 import { Auth, onAuthStateChanged, User, signOut }  from '@angular/fire/auth';
 import { Router, RouterModule } from '@angular/router';
+import { FooterComponent } from "../../footer/footer.component";
+import { CarritoCotizacionComponent } from "../../carrito-cotizacion/carrito-cotizacion.component";
 
 
 
 @Component({
   selector: 'app-display-productos',
-  imports: [ CommonModule, FormsModule, RouterModule],  
+  imports: [CommonModule, FormsModule, RouterModule, CarritoCotizacionComponent],  
   templateUrl: './display-productos.component.html',
   styleUrl: './display-productos.component.css',
   
@@ -44,7 +46,6 @@ filtroMarca: string = '';
 filtroEstatus: string = '';
 busqueda ="";
 
-
   // Constructor
 constructor(private productoService: ProductoService, private firestore: Firestore,
   private subirImagenService:SubirImagenService, private authentication :  Auth, private router: Router
@@ -52,8 +53,6 @@ constructor(private productoService: ProductoService, private firestore: Firesto
   this.productoService = productoService;
   this.firestore = firestore;
  }
-
-
 
 async agregarProducto() {
   // Validación: todos los campos obligatorios deben estar llenos
@@ -156,7 +155,7 @@ async guardarEdicion() {
     //si el usuario selecciona una nueva imagen se sube y se usa la nueva url
     let imagenUrl = this.nuevoProducto.imagenProducto;
     if (this.imagenSeleccionada) {
-      imagenUrl = await this.subirImagenService.subirImagen(this.imagenSeleccionada).toPromise();
+      imagenUrl = await firstValueFrom(this.subirImagenService.subirImagen(this.imagenSeleccionada));
     }
 
     const productoRef = doc(this.firestore, 'Producto', this.nuevoProducto.idProducto);
@@ -236,6 +235,11 @@ get productosFiltrados() {
   );
 }
 
+
+  verDetalle(idProducto : string){
+    this.router.navigate(['/producto', idProducto])
+
+}
 
 /* Sección de CRUD productos*/
 

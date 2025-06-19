@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { CarritoCotizacionComponent } from "../carrito-cotizacion/carrito-cotizacion.component";
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule],
+  imports: [CommonModule, CarritoCotizacionComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

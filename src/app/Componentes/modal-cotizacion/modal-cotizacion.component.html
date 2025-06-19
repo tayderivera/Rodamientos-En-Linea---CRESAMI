@@ -1,0 +1,25 @@
+<div *ngIf="mostrar" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-smflex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 w-full max-w-md relative">
+    <button (click)="cerrar.emit()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+    <h2 class="text-lg font-bold mb-4">Enviar cotización</h2>
+    <form (ngSubmit)="enviarCotizacion()" autocomplete="off">
+      <label class="block mb-2 font-medium">Correo electrónico *</label>
+      <input type="email" [(ngModel)]="email" name="email" required class="w-full border rounded px-3 py-2 mb-4" />
+
+      <label class="block mb-2 font-medium">Mensaje (opcional)</label>
+      <textarea [(ngModel)]="mensaje" name="mensaje" rows="3" class="w-full border rounded px-3 py-2 mb-4"></textarea>
+
+      <div class="mb-4">
+        <div class="font-semibold mb-2">Productos a cotizar:</div>
+        <ul>
+          <li *ngFor="let p of productos" class="flex items-center mb-1">
+            <img [src]="p.imagenProducto" alt="" class="w-8 h-8 mr-2" />
+            <span>{{ p.nombreProducto }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <button type="submit" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition">Enviar</button>
+    </form>
+  </div>
+</div>
