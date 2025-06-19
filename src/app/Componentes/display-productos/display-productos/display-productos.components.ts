@@ -155,7 +155,7 @@ async guardarEdicion() {
     //si el usuario selecciona una nueva imagen se sube y se usa la nueva url
     let imagenUrl = this.nuevoProducto.imagenProducto;
     if (this.imagenSeleccionada) {
-      imagenUrl = await this.subirImagenService.subirImagen(this.imagenSeleccionada).toPromise();
+      imagenUrl = await firstValueFrom(this.subirImagenService.subirImagen(this.imagenSeleccionada));
     }
 
     const productoRef = doc(this.firestore, 'Producto', this.nuevoProducto.idProducto);

@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../Clases/bd';
 import { FooterComponent } from '../footer/footer.component';
-import { switchMapTo } from 'rxjs';
 import { CarritoCotizacionComponent } from "../carrito-cotizacion/carrito-cotizacion.component";
 import { CarritoCotizacionService } from '../../Servicios/carrito.service';
 import Swal from 'sweetalert2';

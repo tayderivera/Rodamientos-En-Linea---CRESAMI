@@ -41,9 +41,7 @@ export class CarritoCotizacionService {
 
 eliminarProductoPorId(idProducto: string) {
   this.productos = this.productos.filter(p => p.idProducto !== idProducto);
-  this.guardarCarrito(
-
-  )
+  this.guardarCarrito();
 }
 
   limpiarCarrito() {
