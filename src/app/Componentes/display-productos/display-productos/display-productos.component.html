@@ -1,55 +1,5 @@
-<header id="header"
-    class="navbar">
-  <div class="container" style="font-family: Inter;">
-      <!-- Logo -->
-      <a href="#" class="logo">
-        <img class="header-logo" src="./assets/RODAMIENTOSENLINEA.png" alt="Logo">
-      </a>
-      <!-- Navegacion -->
-      <nav class="desktop-nav" *ngIf="!usuarioActual">
-        <a href="" class="nav-link cursor-pointer">Inicio</a>
-        <a class="nav-link cursor-pointer" (click)="scrollToSection('productos')">Productos</a>
-        <a class="nav-link cursor-pointer" (click)="scrollToSection('contacto')">Contacto</a>
-        <app-carrito-cotizacion></app-carrito-cotizacion>
-      </nav>
 
-      <!-- Menú usuario (solo si hay sesión iniciada) -->
-      <div class="flex items-center gap-2" *ngIf="usuarioActual as user">
-        <span class="text-gray-700 text-sm font-medium cursor-pointer" (click)="toggleMenuUsuario()">
-          {{ user.email }}
-        </span>
-        <!-- icono de usuario, etc -->
-        <div *ngIf="menuUsuarioAbierto" class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50">
-          <button 
-            class="block w-full text-left px-4 py-2 hover:bg-gray-100"
-            (click)="cerrarSesion()">
-            Cerrar sesión
-          </button>
-        </div>
-      </div>
-        
-      
-      <!-- Mobile Menu -->
-      <div class="mobile-menu">
-          <button id="menu-toggle" class="menu-button" (click)="toggleMenu()">
-              <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-          </button>
-      </div>
-  </div>
-
-  <!-- Menú desplegable -->
-  <div *ngIf="isMenuOpen" >
-    <nav class="mobile-nav">
-        <a href="#inicio" class="nav-link">Inicio</a>  
-        <a href="#productos" class="nav-link">Productos</a>
-        <a href="#contacto" class="nav-link">Contacto</a>
-    </nav>
-</div>
-</header>
-
-
+<app-header></app-header>
 <!-- Sección de menú lateral y productos -->
 <section class="flex flex-col md:flex-row py-8 font-[Inter] mt-20 md:ml-8">
   <!-- Menú lateral de filtros y botón -->
@@ -227,6 +177,9 @@
       </div>
       </div>
     </div>
-    
 </section>
+
+</section>
+<app-footer></app-footer>
+
 
