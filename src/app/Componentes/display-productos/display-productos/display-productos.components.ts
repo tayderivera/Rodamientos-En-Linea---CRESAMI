@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+
 import { HeaderComponent } from "../../header/header.component";
 import { ProductoService } from "../../../Servicios/producto.service";
 import { Producto } from '../../../Clases/bd';
@@ -14,11 +15,11 @@ import { Router, RouterModule } from '@angular/router';
 import { FooterComponent } from "../../footer/footer.component";
 import { CarritoCotizacionComponent } from "../../carrito-cotizacion/carrito-cotizacion.component";
 
-
+import { EmailJSResponseStatus } from 'emailjs-com';
 
 @Component({
   selector: 'app-display-productos',
-  imports: [CommonModule, FormsModule, RouterModule, CarritoCotizacionComponent],  
+  imports: [CommonModule, FormsModule, RouterModule, CarritoCotizacionComponent, HeaderComponent, FooterComponent],  
   templateUrl: './display-productos.component.html',
   styleUrl: './display-productos.component.css',
   
@@ -278,6 +279,12 @@ get productosFiltrados() {
       this.usuarioActual =  user;
     })
   }
+
+//logica para enviar la cotizacion mediante EmailJS
+  enviarCotizacion(){
+    
+  }
+
 
 
   }
