@@ -1,47 +1,61 @@
 <header id="header"
-    class="navbar">
-  <div class="container" style="font-family: Inter;">
-      <!-- Logo -->
-      <a href="#" class="logo">
-        <img class="header-logo" src="./assets/RODAMIENTOSENLINEA.png" alt="Logo">
-      </a>
-      <!-- Navegacion -->
-      <nav class="desktop-nav">
-        <a href="" class="nav-link cursor-pointer">Inicio</a>
-        <a class="nav-link cursor-pointer">Productos</a>
-        <a class="nav-link cursor-pointer">Contacto</a>
-         <button class="nav-link relative cursor-pointer"(click)="carrito.togglePopover()">
+        class="navbar">
+      <div class="container" style="font-family: Inter;">
+          <!-- Logo -->
+          <a href="#" class="logo">
+            <img class="header-logo" *ngIf="!usuarioActual" src="./assets/RODAMIENTOSENLINEA.png" alt="Logo">
+          </a>
+        <!-- Navegacion -->
+          <nav class="desktop-nav" *ngIf="!usuarioActual">
+            <a class="nav-link cursor-pointer">Inicio</a>
+            <a class="nav-link cursor-pointer">Productos</a>
+            <a class="nav-link cursor-pointer" >Contacto</a>
+            <button class="nav-link relative cursor-pointer"(click)="carrito.togglePopover()">
 
-            <!-- Icono SVG del carrito -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-            </svg>
+                <!-- Icono SVG del carrito -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                </svg>
 
-        </button>
-        <app-carrito-cotizacion #carrito></app-carrito-cotizacion>
-      </nav>
+            </button>
+            <app-carrito-cotizacion #carrito></app-carrito-cotizacion>
+          </nav>
 
-        
-      
-      <!-- Mobile Menu -->
-      <div class="mobile-menu">
-          <button id="menu-toggle" class="menu-button" (click)="toggleMenu()">
-              <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-          </button>
+          <!-- Menú usuario (solo si hay sesión iniciada) -->
+          <div class="flex items-center gap-2" *ngIf="usuarioActual as user">
+            <span class="text-gray-700 text-sm font-medium cursor-pointer mx-auto" (click)="toggleMenuUsuario()">
+              {{ user.email }}
+            </span>
+            <!-- icono de usuario, etc -->
+            <div *ngIf="menuUsuarioAbierto" class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50">
+              <button 
+                class="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                (click)="cerrarSesion()">
+                Cerrar sesión
+              </button>
+            </div>
+          </div>
+            
+          
+          <!-- Mobile Menu -->
+          <div class="mobile-menu" *ngIf="!usuarioActual">
+              <button id="menu-toggle" class="menu-button" (click)="toggleMenu()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                  </svg>
+              </button>
+          </div>
       </div>
-  </div>
 
-  <!-- Menú desplegable -->
-  <div *ngIf="isMenuOpen" >
-    <nav class="mobile-nav">
-        <a href="#inicio" class="nav-link">Inicio</a>  
-        <a href="#productos" class="nav-link">Productos</a>
-        <a href="#contacto" class="nav-link">Contacto</a>
-    </nav>
-</div>
-</header>
+      <!-- Menú desplegable -->
+      <div *ngIf="isMenuOpen" >
+        <nav class="mobile-nav">
+            <a href="#inicio" class="nav-link">Inicio</a>  
+            <a href="#productos" class="nav-link">Productos</a>
+            <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
+    </div>
+    </header>
 
 
 
@@ -66,24 +80,24 @@
           
           
         </div>
-        <div class="flex">
-        <button (click)="agregaralCarrito()"
-        class="flex text-white bg-[#e87025] text-sm md:text-lg font-[Inter] border-0 py-2 px-8 focus:outline-none hover:bg-[#913d09] rounded-2xl cursor-pointer">
-        Cotizar
-        </button>
-        </div>
+          <div class="flex sm:text-center">
+          <button (click)="agregaralCarrito()"
+          class="flex text-white bg-[#e87025] text-sm md:text-lg font-[Inter] border-0 py-2 px-8 focus:outline-none hover:bg-[#913d09] rounded-2xl cursor-pointer">
+          Cotizar
+          </button>
+          </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="font-[Inter] mt-10 overflow-hidden mx-20 mb-20">
-  <h2 class="text-sm sm:text-2xl md:text-3xl font-medium font-[Inter] text-center mb-12 ">Productos relacionados</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<section class="font-[Inter] mt-20 overflow-hidden mx-2 sm:mx-4 md:mx-10 lg:mx-20 mb-20">
+  <h2 class="text-2xl sm:text-2xl md:text-3xl font-medium font-[Inter] text-center mb-12 ">Productos relacionados</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
       <div *ngFor="let prod of productosRelacionados" class=" bg-white rounded-xl shadow p-4 flex flex-col items-center border border-gray-300 cursor-pointer"
        (click)="verDetalle(prod.idProducto)">
         <a class="block relative h-40 rounded overflow-hidden">
-          <img alt="relacionado" class="object-cover object-center w-full h-full block" [src]="prod.imagenProducto">
+          <img alt="relacionado" class="object-contain w-[120px] h-full" [src]="prod.imagenProducto">
         </a>
  
         <div class="mt-4">

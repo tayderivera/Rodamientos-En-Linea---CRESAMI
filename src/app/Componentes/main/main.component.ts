@@ -7,6 +7,8 @@ import { MarcasComponent } from "../marcas/marcas.component";
 import { NosotrosComponent } from "../nosotros/nosotros.component";
 import { RodamientosComponent } from "../rodamientos/rodamientos.component";
 import { ContactanosComponent } from "../contactanos/contactanos.component";
+import { Router } from '@angular/router';
+import { prodErrorMap } from 'firebase/auth';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +18,7 @@ import { ContactanosComponent } from "../contactanos/contactanos.component";
 })
 export class MainComponent {
   scrolled =  false;
-
+  constructor(private router : Router){}
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -29,6 +31,9 @@ export class MainComponent {
     }
   }
   
+  navegarAProductos(){
+    this.router.navigate(["/productos"])
+  }
 
   scrollToForm() {
     const formSection = document.getElementById('formulario');

@@ -1,185 +1,266 @@
 
-<app-header></app-header>
-<!-- Sección de menú lateral y productos -->
-<section class="flex flex-col md:flex-row py-8 font-[Inter] mt-20 md:ml-8">
-  <!-- Menú lateral de filtros y botón -->
-  <aside class="w-full md:w-72 bg-white rounded-xl border border-gray-300 p-4 mb-6 md:mb-0 md:mr-8">
-    <h1 class="text-xl sm:text-2xl md:text-3xl font-bold font-[Inter] text-center mb-4">Productos</h1>
-    <div class="flex justify-center mb-4">
-      <div class="w-8 md:w-12 h-1 rounded-full bg-[#e87025] inline-flex"></div>
-    </div>
-    <div class="flex justify-center mb-4">
-      <button *ngIf="usuarioActual" (click)="abrirModal()" class="px-6 py-2 border-2 border-green-500 text-green-600 rounded-xl font-medium hover:bg-green-50 cursor-pointer transition text-base w-full">
-        Nuevo producto
-      </button>
-    </div>
-    <div class="mb-3">
-      <label class="block font-medium mb-1" for="buscar">Buscar</label>
-      <div class="relative">
-        <input
-          id="buscar"
-          [(ngModel)]="busqueda"
-          type="text"
-          class="w-full border border-gray-300 rounded-md py-1 px-3 pr-8 focus:outline-none focus:ring-2 focus:ring-orange-400 text-base"
-          placeholder="Buscar producto..."
-        />
-        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
-          </svg>
-        </span>
-      </div>
-    </div>
-    <div class="mb-3">
-      <label class="block font-medium mb-1" for="categoria">Categoría</label>
-      <select id="categoria" class="w-full border border-gray-300 rounded-md py-1 px-3 text-base" [(ngModel)]="filtroCategoria">
-        <option value="" selected>TODAS</option>
-        <option value="CONOS Y TAZAS">CONOS Y TAZAS</option>
-        <option value="RIGIDO DE BOLAS">RIGIDO DE BOLAS</option>
-        <option value="AGUJAS">AGUJAS</option>
-        <option value="RODILLOS">RODILLOS</option>
-        <option value="CHUMACERA DE PISO">CHUMACERA DE PISO</option>
-        <option value="CHUMACERA DE PARED">CHUMACERA DE PARED</option>
-        <option value="AUTOMOTRIZ">AUTOMOTRIZ</option>
-        <option value="GRASAS">GRASAS</option>
-        <option value="EXTRACTOR">EXTRACTOR</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label class="block font-medium mb-1" for="marca">Marca</label>
-      <select id="marca" class="w-full border border-gray-300 rounded-md py-1 px-3 text-base" [(ngModel)]="filtroMarca">
-        <option value="">TODAS</option>
-        <option value="SKF">SKF</option>
-        <option value="FAG">FAG</option>
-        <option value="TIMKEN">TIMKEN</option>
-        <option value="NTN">NTN</option>
-        <option value="SNR">SNR</option>
-        <option value="NSK">NSK</option>
-        <option value="EBI">EBI</option>
-        <option value="INA">INA</option>
-      </select>
-    </div>
-    <div  *ngIf="usuarioActual">
-      <label class="block font-medium mb-1" for="estatus">Estatus:</label>
-      <select id="estatus" class="w-full border border-gray-300 rounded-md py-1 px-3 text-base" [(ngModel)]="filtroEstatus">
-        <option value="">TODO</option>
-        <option value="activo">ACTIVO</option>
-        <option value="inactivo">INACTIVO</option>
-      </select>
-    </div>
-  </aside>
+
+<div class="min-h-screen flex flex-col">
+  
 
 
+    <header id="header"
+        class="navbar">
+      <div class="container" style="font-family: Inter;">
+          <!-- Logo -->
+          <a href="#" class="logo">
+            <img class="header-logo" *ngIf="!usuarioActual" src="./assets/RODAMIENTOSENLINEA.png" alt="Logo">
+          </a>
+        <!-- Navegacion -->
+          <nav class="desktop-nav" *ngIf="!usuarioActual">
+            <a class="nav-link cursor-pointer"(click)="scrollToSection('hero')">Inicio</a>
+            <a class="nav-link cursor-pointer" (click)="scrollToSection('productos')">Productos</a>
+            <a class="nav-link cursor-pointer" (click)="scrollToSection('contacto')">Contacto</a>
+            <button class="nav-link relative cursor-pointer"(click)="carrito.togglePopover()">
 
-<!-- Sección de listado de productos -->
-<section class=" body-font font-[Inter]">
-  <div class="container px-5 py-24 mx-auto">
+                <!-- Icono SVG del carrito -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                </svg>
 
-    <!-- Modal -->
-    <div 
-      *ngIf="isModalOpen" 
-      class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm">
-      <div class="bg-white p-8 rounded shadow-lg relative w-full max-w-lg">
-        <h2 class="text-2xl font-bold mb-4 text"> {{isModoEdicion ? 'Editar Producto' : 'Agregar Producto'}}</h2>
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <label for="imagenProducto" class="block text-gray-700 text-sm font-bold mb-2">Imagen</label>
-            <input type="file" id="imagenProducto" class="border border-gray-300 p-2 w-full rounded-md" (change)="onFileSelected($event)">
+            </button>
+            <app-carrito-cotizacion #carrito></app-carrito-cotizacion>
+          </nav>
+
+          <!-- Menú usuario (solo si hay sesión iniciada) -->
+          <div class="flex items-center gap-2" *ngIf="usuarioActual as user">
+            <span class="text-gray-700 text-sm font-medium cursor-pointer mx-auto" (click)="toggleMenuUsuario()">
+              {{ user.email }}
+            </span>
+            <!-- icono de usuario, etc -->
+            <div *ngIf="menuUsuarioAbierto" class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50">
+              <button 
+                class="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                (click)="cerrarSesion()">
+                Cerrar sesión
+              </button>
+            </div>
           </div>
-          <div>
-            <label for="nombreProducto" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
-            <input type="text" id="nombreProducto" class="border border-gray-300 p-2 w-full rounded-md" required [(ngModel)]="nuevoProducto.nombreProducto">
-          </div>
-
-          <div>
-            <label for="marca" class="block text-gray-700 text-sm font-bold mb-2">Marca</label>
-            <input type="text" id="marca" class="border border-gray-300 p-2 w-full rounded-md" required [(ngModel)]="nuevoProducto.marcaProducto">
-          </div>
-
-          <div>
-            <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">Categoría</label>
-            <select id="categoria" class="border border-gray-300 p-2 w-full rounded-md " [(ngModel)]="nuevoProducto.categoriaProducto" required>
-              <option value="" disabled selected>Seleccione una categoría</option>
-              <option value="CONOS Y TAZAS">CONOS Y TAZAS</option>
-              <option value="RIGIDO DE BOLAS">RIGIDO DE BOLAS</option>
-              <option value="AGUJAS">AGUJAS</option>
-              <option value="RODILLOS">RODILLOS</option>
-              <option value="AUTOMOTRIZ">AUTOMOTRIZ</option>
-              <option value="CHUMACERA DE PISO">CHUMACERA DE PISO</option>
-              <option value="CHUMACERA DE PARED">CHUMACERA DE PARED</option>
-              <option value="GRASAS">GRASAS</option>
-              <option value="EXTRACTOR">EXTRACTOR</option>
-            </select>
-          </div>  
             
-          <div class="col-span-2">
-            <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripción</label>
-            <textarea id="descripcion" class="border border-gray-300 p-2 w-full rounded-md" rows="3" columns="2" [(ngModel)]="nuevoProducto.descripcionProducto"></textarea>
+          
+          <!-- Mobile Menu -->
+          <div class="mobile-menu" *ngIf="!usuarioActual">
+              <button id="menu-toggle" class="menu-button" (click)="toggleMenu()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                  </svg>
+              </button>
           </div>
+      </div>
+
+      <!-- Menú desplegable -->
+      <div *ngIf="isMenuOpen" >
+        <nav class="mobile-nav">
+            <a href="#inicio" class="nav-link">Inicio</a>  
+            <a href="#productos" class="nav-link">Productos</a>
+            <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
+    </div>
+    </header>
+
+      <section class=" flex-1 flex flex-col md:flex-row py-8 px-4 font-[Inter] mt-20 justify-center gap-8">
+      <!-- Menú lateral de filtros y botón -->
+      <aside *ngIf="productosFiltrados.length > 0" class="w-full md:w-72 bg-white rounded-xl  md:border border-gray-300 p-4 mb-6 md:mb-0">
+        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold font-[Inter] text-center mb-4">Productos</h1>
+        <div class="flex justify-center mb-4">
+          <div class="w-8 md:w-12 h-1 rounded-full bg-[#e87025] inline-flex"></div>
+        </div>
+        <div class="flex justify-center mb-4">
+          <button *ngIf="usuarioActual" (click)="abrirModal()" class="px-6 py-2 border-2 border-green-500 text-green-600 rounded-xl font-medium hover:bg-green-50 cursor-pointer transition text-base w-full">
+            Nuevo producto
+          </button>
+        </div>
+        <div class="mb-3">
+          <label class="block font-medium mb-1" for="buscar">Buscar</label>
+          <div class="relative">
+            <input
+              id="buscar"
+              [(ngModel)]="busqueda"
+              type="text"
+              class="w-full border border-gray-300 rounded-md py-1 px-3 pr-8 focus:outline-none focus:ring-2 focus:ring-orange-400 text-base"
+              placeholder="Buscar producto..."
+            />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-row md:flex-col gap-3 mb-3">
+          <div class=" md:w-full w-1/2">
+          <label class="block font-medium mb-1" for="categoria">Categoría</label>
+          <select id="categoria" class="w-full border border-gray-300 rounded-md py-1 px-3 text-base" [(ngModel)]="filtroCategoria">
+            <option value="" selected>TODAS</option>
+            <option value="CONOS Y TAZAS">CONOS Y TAZAS</option>
+            <option value="RIGIDO DE BOLAS">RIGIDO DE BOLAS</option>
+            <option value="AGUJAS">AGUJAS</option>
+            <option value="RODILLOS">RODILLOS</option>
+            <option value="CHUMACERA DE PISO">CHUMACERA DE PISO</option>
+            <option value="CHUMACERA DE PARED">CHUMACERA DE PARED</option>
+            <option value="AUTOMOTRIZ">AUTOMOTRIZ</option>
+            <option value="GRASAS">GRASAS</option>
+            <option value="EXTRACTOR">EXTRACTOR</option>
+          </select>
+        </div>
+        <div class="md:w-full w-1/2">
+          <label class="block font-medium mb-1" for="marca">Marca</label>
+          <select id="marca" class="w-full border border-gray-300 rounded-md py-1 px-3 text-base" [(ngModel)]="filtroMarca">
+            <option value="">TODAS</option>
+            <option value="SKF">SKF</option>
+            <option value="FAG">FAG</option>
+            <option value="TIMKEN">TIMKEN</option>
+            <option value="NTN">NTN</option>
+            <option value="SNR">SNR</option>
+            <option value="NSK">NSK</option>
+            <option value="EBI">EBI</option>
+            <option value="INA">INA</option>
+          </select>
+        </div>
 
 
         </div>
-
-        <button (click)="isModoEdicion ? guardarEdicion():  agregarProducto()"  class="px-6 py-2 border-2 border-green-500 text-green-600 rounded-xl font-medium hover:bg-green-50 cursor-pointer transition text-base w-full mt-2">{{isModoEdicion ? 'Guardar Cambios' : 'Guardar'}}</button>
-
-
-
-
-        <button 
         
-          class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 hover:cursor-pointer"
-          (click)="cerrarModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-          </svg>
-        </button>
+        <div  *ngIf="usuarioActual">
+          <label class="block font-medium mb-1" for="estatus">Estatus:</label>
+          <select id="estatus" class="w-full border border-gray-300 rounded-md py-1 px-3 text-base" [(ngModel)]="filtroEstatus">
+            <option value="">TODO</option>
+            <option value="activo">ACTIVO</option>
+            <option value="inactivo">INACTIVO</option>
+          </select>
+        </div>
+      </aside>
+
+
+
+    <!-- Modal -->
+    <section class=" body-font font-[Inter]">
+      <div class="container px-5 py-24 mx-auto">
+
+        <div 
+          *ngIf="isModalOpen" 
+          class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm">
+          <div class="bg-white p-8 rounded shadow-lg relative w-full max-w-lg">
+            <h2 class="text-2xl font-bold mb-4 text"> {{isModoEdicion ? 'Editar Producto' : 'Agregar Producto'}}</h2>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <label for="imagenProducto" class="block text-gray-700 text-sm font-bold mb-2">Imagen</label>
+                <input type="file" id="imagenProducto" class="border border-gray-300 p-2 w-full rounded-md" (change)="onFileSelected($event)">
+              </div>
+              <div>
+                <label for="nombreProducto" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
+                <input type="text" id="nombreProducto" class="border border-gray-300 p-2 w-full rounded-md" required [(ngModel)]="nuevoProducto.nombreProducto">
+              </div>
+
+              <div>
+                <label for="marca" class="block text-gray-700 text-sm font-bold mb-2">Marca</label>
+                <input type="text" id="marca" class="border border-gray-300 p-2 w-full rounded-md" required [(ngModel)]="nuevoProducto.marcaProducto">
+              </div>
+
+              <div>
+                <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">Categoría</label>
+                <select id="categoria" class="border border-gray-300 p-2 w-full rounded-md " [(ngModel)]="nuevoProducto.categoriaProducto" required>
+                  <option value="" disabled selected>Seleccione una categoría</option>
+                  <option value="CONOS Y TAZAS">CONOS Y TAZAS</option>
+                  <option value="RIGIDO DE BOLAS">RIGIDO DE BOLAS</option>
+                  <option value="AGUJAS">AGUJAS</option>
+                  <option value="RODILLOS">RODILLOS</option>
+                  <option value="AUTOMOTRIZ">AUTOMOTRIZ</option>
+                  <option value="CHUMACERA DE PISO">CHUMACERA DE PISO</option>
+                  <option value="CHUMACERA DE PARED">CHUMACERA DE PARED</option>
+                  <option value="GRASAS">GRASAS</option>
+                  <option value="EXTRACTOR">EXTRACTOR</option>
+                </select>
+              </div>  
+                
+              <div class="col-span-2">
+                <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripción</label>
+                <textarea id="descripcion" class="border border-gray-300 p-2 w-full rounded-md" rows="3" columns="2" [(ngModel)]="nuevoProducto.descripcionProducto"></textarea>
+              </div>
+
+
+            </div>
+
+            <button (click)="isModoEdicion ? guardarEdicion():  agregarProducto()"  class="px-6 py-2 border-2 border-green-500 text-green-600 rounded-xl font-medium hover:bg-green-50 cursor-pointer transition text-base w-full mt-2">{{isModoEdicion ? 'Guardar Cambios' : 'Guardar'}}</button>
+
+
+
+
+            <button 
+            
+              class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+              (click)="cerrarModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
       </div>
+    </section>
+
+
+
+
+    <!-- Mostrar mensaje si no hay productos -->
+    <div *ngIf="productosFiltrados.length === 0" class="col-span-full text-center text-gray-500 text-lg py-12">
+      No hay productos para esta categoría.
     </div>
 
     <!-- Grilla de productos -->
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div *ngFor="let producto of productosFiltrados" (click)="!usuarioActual && verDetalle(producto.idProducto)" class=" bg-white rounded-xl shadow p-4 flex flex-col items-center border border-gray-300 cursor-pointer">
-        <a class="block relative h-40 rounded overflow-hidden">
-          <img alt="ecommerce" class="object-cover object-center w-full h-full block" [src]="producto.imagenProducto">
-        </a>
- 
-        <div class="mt-4">
-          <h3 class="text-gray-500 text-[10px] tracking-widest title-font mb-1">
-            {{ producto.categoriaProducto }} <span class="mx-1">|</span> {{ producto.marcaProducto }}
-          </h3>
-          <h2 class="text-gray-900 title-font text-md ">{{ producto.nombreProducto }}</h2>
-           <!-- Botón Editar -->
-        <button *ngIf="usuarioActual" class="p-2 rounded border border-blue-400 bg-white hover:bg-blue-50 transition cursor-pointer" (click)="abrirModalEdicion(producto)">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b5563" class="bi bi-pencil-square" viewBox="0 0 16 16">
-          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-        </svg>
-        </button>
-        <!-- Botón Eliminar (cambia estado a inactivo) -->
-        <button *ngIf="producto.estado !== 'inactivo' && usuarioActual" class="p-2 rounded border border-red-400 bg-white hover:bg-red-50 transition ml-2 cursor-pointer"(click)="desactivarProducto(producto)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b5563" class="bi bi-trash" viewBox="0 0 16 16">
-            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-            </svg>
-        </button>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-6  justify-items-center">
+          <div *ngFor="let producto of productosFiltrados" (click)="!usuarioActual && verDetalle(producto.idProducto)" class="bg-white rounded-xl shadow flex flex-col items-center border border-gray-300 cursor-pointer w-full p-2  transition hover:shadow-lg justify-center">
+            <a class="block relative h-40 rounded overflow-hidden">
+              <img alt="ecommerce" class="object-contain w-[120px] h-full" [src]="producto.imagenProducto">
+            </a>
+    
+            <div class="mt-2 w-full text-center">  
+              <h3 class="text-gray-500 text-[10px] tracking-widest title-font mb-1">
+                {{ producto.categoriaProducto }} <span class="mx-1">|</span> {{ producto.marcaProducto }}
+              </h3>
+              <h2 class="text-gray-900 title-font text-md ">{{ producto.nombreProducto }}</h2>
+              <!-- Botón Editar -->
+              <button *ngIf="usuarioActual" class="p-2 rounded border border-blue-400 bg-white hover:bg-blue-50 transition cursor-pointer mt-2" (click)="abrirModalEdicion(producto)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b5563" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+              </svg>
+              </button>
+              <!-- Botón Eliminar (cambia estado a inactivo) -->
+              <button *ngIf="producto.estado !== 'inactivo' && usuarioActual" class="p-2 rounded border border-red-400 bg-white hover:bg-red-50 transition ml-2 cursor-pointer"(click)="desactivarProducto(producto)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4b5563" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                  </svg>
+              </button>
 
-        <!-- Botón Restaurar (solo si el producto está inactivo) -->
-        <button
-          *ngIf="producto.estado === 'inactivo' && usuarioActual"
-          class="p-2 rounded border border-green-400 bg-white hover:bg-green-50 transition ml-2"
-          (click)="activarProducto(producto)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#22c55e" class="bi bi-plus-lg" viewBox="0 0 16 16">
-            <path d="M8 1a.5.5 0 0 1 .5.5v6.5H15a.5.5 0 0 1 0 1H8.5V15a.5.5 0 0 1-1 0V8.5H1a.5.5 0 0 1 0-1h6.5V1.5A.5.5 0 0 1 8 1z"/>
-          </svg>
-        </button>
+                <!-- Botón Restaurar (solo si el producto está inactivo) -->
+                <button
+                  *ngIf="producto.estado === 'inactivo' && usuarioActual"
+                  class="p-2 rounded border border-green-400 bg-white hover:bg-green-50 transition ml-2"
+                  (click)="activarProducto(producto)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#22c55e" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path d="M8 1a.5.5 0 0 1 .5.5v6.5H15a.5.5 0 0 1 0 1H8.5V15a.5.5 0 0 1-1 0V8.5H1a.5.5 0 0 1 0-1h6.5V1.5A.5.5 0 0 1 8 1z"/>
+                  </svg>
+                </button>
 
-        </div>
-      </div>
-      </div>
-    </div>
-</section>
+            </div>
+          </div>
+          </div>
+        
 
-</section>
-<app-footer></app-footer>
+    </section>
+
+
+
+
+    <app-footer></app-footer>
+</div>
 
 

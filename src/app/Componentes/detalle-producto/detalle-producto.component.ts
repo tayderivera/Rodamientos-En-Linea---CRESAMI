@@ -9,9 +9,10 @@ import { FooterComponent } from '../footer/footer.component';
 import { CarritoCotizacionComponent } from "../carrito-cotizacion/carrito-cotizacion.component";
 import { CarritoCotizacionService } from '../../Servicios/carrito.service';
 import Swal from 'sweetalert2';
+import { HeaderComponent } from '../header/header.component';
 @Component({
   selector: 'app-detalle-producto',
-  imports: [RouterModule, CommonModule, FormsModule, FooterComponent, CarritoCotizacionComponent],
+  imports: [RouterModule, CommonModule, FormsModule, FooterComponent, CarritoCotizacionComponent, HeaderComponent],
   templateUrl: './detalle-producto.component.html',
   styleUrl: './detalle-producto.component.css'
 })
@@ -21,6 +22,7 @@ menuUsuarioAbierto =  false;
  productoId: string | null = null;
   producto: any = null;
   productosRelacionados: Producto[] = []
+  usuarioActual: User | null = null;
 
 constructor(private authentication: Auth, 
   private route: ActivatedRoute,

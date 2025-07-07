@@ -6,7 +6,7 @@ import { Producto } from '../../../Clases/bd';
 import {FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Firestore, addDoc, collection, doc, updateDoc } from '@angular/fire/firestore';
-
+import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { SubirImagenService } from '../../../Servicios/subirimagen.service';
 import Swal from 'sweetalert2';
@@ -49,7 +49,7 @@ busqueda ="";
 
   // Constructor
 constructor(private productoService: ProductoService, private firestore: Firestore,
-  private subirImagenService:SubirImagenService, private authentication :  Auth, private router: Router
+  private subirImagenService:SubirImagenService, private authentication :  Auth, private router: Router, private actRoute: ActivatedRoute
 ) { 
   this.productoService = productoService;
   this.firestore = firestore;
@@ -278,12 +278,16 @@ get productosFiltrados() {
     onAuthStateChanged(this.auth, (user) => {
       this.usuarioActual =  user;
     })
+
+    this.actRoute.queryParams.subscribe(params => {
+      if (params['categoria']){
+        this.filtroCategoria = params['categoria']
+      }
+    })
+
   }
 
-//logica para enviar la cotizacion mediante EmailJS
-  enviarCotizacion(){
-    
-  }
+
 
 
 

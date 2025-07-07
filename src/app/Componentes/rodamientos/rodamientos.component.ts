@@ -4,13 +4,11 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-rodamientos',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './rodamientos.component.html',
   styleUrl: './rodamientos.component.css'
 })
 export class RodamientosComponent {
 
-  irAProductos() {
-
-  }
+  constructor(private router: Router){}
 }

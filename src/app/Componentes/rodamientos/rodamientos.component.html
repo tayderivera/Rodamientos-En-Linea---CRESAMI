@@ -6,12 +6,7 @@
         Explore la gran variedad de productos que tenemos relacionados con los rodamientos. Desde los rodamientos más clásicos como los de bolas, hasta los más avanzados, podrás encontrar el modelo indicado.
       </p>
        <div class="p-2 w-full">
-          <button
-  class="flex mx-auto text-white bg-[#e87025] text-sm md:text-lg font-[Inter] border-0 py-2 px-8 focus:outline-none hover:bg-[#913d09] rounded-2xl cursor-pointer">
-  <a href="/productos">
-  Ver todo</a>
-
-        </button>
+          
         </div>
       <div class="flex mt-4 md:mt-6 justify-center">
         <div class="w-12 md:w-16 h-1 rounded-full bg-[#e87025] inline-flex"></div>
@@ -20,55 +15,55 @@
   </div>
 
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/conicos.png" alt="Rodamiento 1" class="w-40 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <a href="/conos-y-tazas" class="text-white text-center w-full py-2 bg-black bg-opacity-50">Rodamiento Cónico</a>
-      </div>
-    </div>
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/rigido de bolas.png" alt="Rodamiento 2" class="w-40 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <p class="text-white text-center w-full py-2 bg-black bg-opacity-50">Rodamiento de Bolas</p>
-      </div>
-    </div>
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/rodamiento de agujas.png" alt="Rodamiento 3" class="w-40 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <p class="text-white text-center w-full py-2 bg-black bg-opacity-50">Rodamiento de Agujas</p>
-      </div>
-    </div>
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/rodamiento de rodillos.png" alt="Rodamiento 4" class="w-40 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <p class="text-white text-center w-full py-2 bg-black bg-opacity-50">Rodamiento de Rodillos</p>
-      </div>
-    </div>
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/chumacera.png" alt="Chumacera de piso" class="w-60 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <p class="text-white text-center w-full py-2 bg-black bg-opacity-50">Chumacera de piso</p>
-      </div>
-    </div>
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/chu de piso.png" alt="Rodamiento 4" class="w-60 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <p class="text-white text-center w-full py-2 bg-black bg-opacity-50">Chumacera de pared</p>
-      </div>
-    </div>
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/grasas.png" alt="Rodamiento 4" class="w-60 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <p class="text-white text-center w-full py-2 bg-black bg-opacity-50">Grasas de nivel industrial</p>
-      </div>
-    </div>
-    <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
-      <img src="./assets/extractor.jpg" alt="Rodamiento 4" class="w-60 h-auto object-contain">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-        <p class="text-white text-center w-full py-2 bg-black bg-opacity-50">Extractores de rodamientos</p>
-      </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/conicos.png" alt="Rodamiento 1" class="w-40 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'CONOS Y TAZAS' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Rodamiento Cónico</a>
     </div>
   </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/rigido de bolas.png" alt="Rodamiento 2" class="w-40 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'RIGIDO DE BOLAS' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Rodamiento de Bolas</a>
+    </div>
+  </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/rodamiento de agujas.png" alt="Rodamiento 3" class="w-40 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'AGUJAS' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Rodamiento de Agujas</a>
+    </div>
+  </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/rodamiento de rodillos.png" alt="Rodamiento 4" class="w-40 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'RODILLOS' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Rodamiento de Rodillos</a>
+    </div>
+  </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/chumacera.png" alt="Chumacera de piso" class="w-60 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'CHUMACERA DE PISO' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Chumacera de piso</a>
+    </div>
+  </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/chu de piso.png" alt="Chumacera de pared" class="w-60 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'CHUMACERA DE PARED' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Chumacera de pared</a>
+    </div>
+  </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/grasas.png" alt="Grasas" class="w-60 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'GRASAS' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Grasas de nivel industrial</a>
+    </div>
+  </div>
+  <div class="relative group border border-gray-300 shadow-md rounded-lg overflow-hidden flex justify-center items-center">
+    <img src="./assets/extractor.jpg" alt="Extractores" class="w-60 h-auto object-contain cursor-pointer">
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+      <a [routerLink]="['/productos']" [queryParams]="{ categoria: 'EXTRACTOR' }" class="text-white text-center w-full py-2 bg-black bg-opacity-50 block">Extractores de rodamientos</a>
+    </div>
+  </div>
+</div>
 </section>
 
 
