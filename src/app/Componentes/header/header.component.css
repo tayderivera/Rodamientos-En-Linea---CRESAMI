@@ -64,9 +64,7 @@
 .navbar.hero-section-menu-open .menu-icon {
     color: white; /* Color blanco d ela fuente sobre la sección hero */
 }
-.navbar.hero-section-menu-open  {
-    background-color: #243344; /* Color blanco d ela fuente sobre la sección hero */
-}
+/* Removed duplicate .navbar.hero-section-menu-open selector to keep stylesheet DRY */
 
 .dropdown-menu-default {
     position: absolute;
